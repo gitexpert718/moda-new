@@ -350,7 +350,7 @@
 						<li data-target="#carousel-example-1z" data-slide-to="2"></li>
 					</ol>
 
-					<div class="carousel-inner">
+					<div class="carousel-inner" id="phone-carousel-inner">
 						<div class="carousel-item active">
 							<div class="view">
 								<img class="d-sm-block d-md-none d-lg-none" src="images/whiteBg.jpg" alt="First slide" height="100%">
@@ -1014,6 +1014,11 @@
 			var isiPad = navigator.userAgent.match(/iPad/i) != null;
 			if(isiPad) {
 				document.getElementById("carousel-example-1z").style.height = "40%";
+			}
+
+			var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1;
+			if(isAndroid) {
+				document.getElementById("phone-carousel-inner").style.height = "90%";
 			}
 
 		</script>
