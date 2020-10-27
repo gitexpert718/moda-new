@@ -132,21 +132,31 @@
 		}
 }
 
-@media screen and (max-width: 992px) and (min-width: 700px) {
+@media screen and (max-width: 1600px) and (min-width: 1400px) {
 	#carousel-example-1z{
 		width: 100%;
-		height: 41%;
+		height: 70%;
 		overflow:hidden;
 	}
-	/* .carousel-inner {
-		height: 120%;
-	}
-	.view {
-		height: 120%;
-	} */
 }
 
-@media screen and (max-width: 700px) and (min-width: 370px) {
+@media screen and (max-width: 1400px) and (min-width: 1024px) {
+	#carousel-example-1z{
+		width: 100%;
+		height: 60%;
+		overflow:hidden;
+	}
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+	#carousel-example-1z{
+		width: 100%;
+		height: 50%;
+		overflow:hidden;
+	}
+}
+
+@media screen and (max-width: 768px) and (min-width: 370px) {
 	#carousel-example-1z{
 		width: 100%;
 		height: 90%;

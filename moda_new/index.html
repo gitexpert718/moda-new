@@ -289,11 +289,11 @@
 					<div class="carousel-inner">
 						<div class="carousel-item active">
 							<div class="view">
-								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" style="height: 100%;" src="images/slide1Back.png" alt="First slide">
+								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" src="images/slide1Back.png" alt="First slide">
 								<div class="black-overlay aqua-gradient"></div>
 							</div>
 							<div class="carousel-caption" id="moveImage">
-								<img src="images/slide1Front.png" class="img-fluid captionImage" style="margin-top: 180%; margin-left: 60%;" width="65%" height="auto">
+								<img src="images/slide1Front.png" class="img-fluid captionImage" style="margin-left: 60%;" width="65%" height="auto">
 							</div>
 							<div class="carousel-caption" style="padding-bottom: 15%; padding-right: 20%;">
 								<h1 class="h1-responsive">WE ARE RESHAPING SHOPPING <br> EXPERIENCE AND HOW WE PROVIDE <br> IT TO YOU</h1>
@@ -302,7 +302,7 @@
 						</div>
 						<div class="carousel-item">
 							<div class="view">
-								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" style="height: 100%;" src="images/slide2Back.jpg" alt="Second 		slide" width="100%">
+								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" src="images/slide2Back.jpg" alt="Second 		slide" width="100%">
 								<div class="black-overlay aqua-gradient"></div>
 							</div>
 							<div class="carousel-caption" id="moveImage1">
@@ -315,7 +315,7 @@
 						</div>
 						<div class="carousel-item">
 							<div class="view">
-								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" style="height: 100%;" src="images/slide3Back.jpg" alt="Third slide" 	width="100%">
+								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" src="images/slide3Back.jpg" alt="Third slide" 	width="100%">
 								<div class="black-overlay aqua-gradient"></div>
 							</div>
 							<div class="carousel-caption" id="moveImage3">
@@ -430,7 +430,7 @@
 
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 5%;">
 						<br><br>
-						<div>
+						<div style="text-align: center;">
 							<img src="images/tryon1.gif" class="img-fluid">
 						</div>
 
@@ -478,7 +478,7 @@
 					<br><br>
 					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 5%;">
 						<br><br>
-						<div>
+						<div style="text-align: center;">
 							<img src="images/tryon5.gif" class="img-fluid">
 						</div>
 					</div>
@@ -1010,6 +1010,12 @@
 				});
 
 			});
+
+			var isiPad = navigator.userAgent.match(/iPad/i) != null;
+			if(isiPad) {
+				document.getElementById("carousel-example-1z").style.height = "40%";
+			}
+
 		</script>
 
 <!--
