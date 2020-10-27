@@ -1,0 +1,1049 @@
+<html>
+	<head>
+		<title>Modaka Technologies - CamWeara | Virtual Tryon Plugin | Jewellery virtual tryon | Eyeglasses Tryon</title>
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1, shrink-to-fit=no"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+ 		<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+		<!-- CSS CDN FOR MDB BOOTSTRAP -->
+		<link rel="shortcut icon" type="image/x-icon" href="images/logo1.png" />
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Barlow' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet'>
+		<!-- Bootstrap core CSS -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Material Design Bootstrap -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+		<!-- LINKS FOR AOS -->
+		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+		<!-- JAVASCRIPT CDN FOR MDB BOOTSTRAP -->
+		<!-- JQuery -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- Bootstrap tooltips -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		<!-- MDB core JavaScript -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+		<!-- LOADING FILES -->
+		<link rel="stylesheet" type="text/css" href="css/loading-bar.css"/>
+		<script type="text/javascript" src="js/loading-bar.js"></script>
+
+
+		<script>
+  			$(function() {
+			  AOS.init();
+			});
+		</script>
+
+
+
+		<script>
+			function onSendClick(){
+
+				//Collecting Values
+				var btn_name = document.getElementById("sendButton");
+				var name = document.getElementById("Name").value;
+				var email = document.getElementById("EMail").value.toLocaleLowerCase();
+				var phone = document.getElementById("phno").value;
+				var company_name = document.getElementById("CompanyName").value;
+				var product_name = document.getElementById("product").value;
+				var message = document.getElementById("contactMessage").value;
+//				var phoneno = /^\d{10}$/;
+				var Emailreg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+				if(name == ""){
+					document.getElementById("nameWarn").innerHTML = "Please enter your name";
+					document.getElementById("nameWarn").style.color="red";
+				}
+				else if (email == "" || Emailreg.test(email) == false){
+					document.getElementById("emailWarn").innerHTML = "Please enter your email";
+					document.getElementById("emailWarn").style.color="red";
+				}
+				else if(phone == ""){
+					document.getElementById("phoneWarn").innerHTML = "Please enter your phone number";
+					document.getElementById("phoneWarn").style.color="red";
+				}
+				else if(company_name == ""){
+					document.getElementById("companyWarn").innerHTML = "Please enter your company name";
+					document.getElementById("companyWarn").style.color="red";
+				}
+				else if(product_name == "SELECT YOUR PRODUCT OF INTEREST"){
+					document.getElementById("productWarn").innerHTML = "Please select a valid product";
+					document.getElementById("productWarn").style.color="red";
+				}
+				else if(message == ""){
+					document.getElementById("messageWarn").innerHTML = "Please enter your message";
+					document.getElementById("messageWarn").style.color="red";
+				}
+				else{
+					document.getElementById("nameWarn").innerHTML = "";
+					document.getElementById("emailWarn").innerHTML = "";
+					document.getElementById("phoneWarn").innerHTML = "";
+					document.getElementById("companyWarn").innerHTML = "";
+					document.getElementById("productWarn").innerHTML = "";
+					document.getElementById("messageWarn").innerHTML = "";
+
+					$("#sendButton").attr("disabled", true);
+//					$("#sendButton").text("SENDING...");
+//					//everything is filled
+					$.ajax({
+						type: "POST",
+						url: "./saveContactUs.php",
+						data: {
+							name: name,
+							email: email,
+							phone: phone,
+							company_name: company_name,
+							product_name: product_name,
+							message: message
+
+						}
+					}).done(function(reply) {
+						console.log('reply from server: '+reply);
+
+						if(reply == "1"){
+//							alert("Thank You, We will get back to you soon");
+
+							document.getElementById("sendMessage").innerHTML ="THANK YOU, WE WILL GET BACK TO YOU SOON.";
+							document.getElementById("sendMessage").style.color = 'black';
+
+							document.getElementById("Name").value ="";
+							document.getElementById("EMail").value ="";
+							document.getElementById("phno").value ="";
+							document.getElementById("CompanyName").value ="";
+							document.getElementById("product").value ="SELECT YOUR PRODUCT OF INTEREST";
+							document.getElementById("contactMessage").value ="";
+//							$("#sendButton").attr("disabled", false);
+
+							document.getElementById("nameWarn").innerHTML = "";
+							document.getElementById("emailWarn").innerHTML = "";
+							document.getElementById("phoneWarn").innerHTML = "";
+							document.getElementById("companyWarn").innerHTML = "";
+							document.getElementById("productWarn").innerHTML = "";
+							document.getElementById("messageWarn").innerHTML = "";
+
+							$("#sendButton").attr("disabled", false);
+						}
+						else{
+							console.log("Could not send mail");
+						}
+					});
+				}
+			}
+
+			function trackInput(){
+				var btn_name = document.getElementById("sendButton");
+				var name = document.getElementById("Name").value;
+				var email = document.getElementById("EMail").value.toLocaleLowerCase();
+				var phone = document.getElementById("phno").value;
+				var company_name = document.getElementById("CompanyName").value;
+				var product_name = document.getElementById("product").value;
+				var message = document.getElementById("contactMessage").value;
+
+				var Emailreg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+				if(name.length > 1){
+					document.getElementById("nameWarn").innerHTML = "";
+				}
+
+				if(Emailreg.test(email) == true){
+					document.getElementById("emailWarn").innerHTML = "";
+				}
+
+				if(phone.length > 1){
+					document.getElementById("phoneWarn").innerHTML = "";
+				}
+
+				if(company_name.length > 1){
+					document.getElementById("companyWarn").innerHTML = "";
+				}
+
+				if(product_name != "SELECT YOUR PRODUCT OF INTEREST"){
+					document.getElementById("productWarn").innerHTML = "";
+				}
+
+				if(message.length > 1){
+					document.getElementById("messageWarn").innerHTML = "";
+				}
+			}
+		</script>
+
+		<!-- CUSTOM CSS -->
+		<link rel="stylesheet" href="css/style.css">
+
+		<link rel="stylesheet" type="text/css" href="css/carousel.css">
+		<link href="css/cr_css.css" type="text/css" rel="stylesheet" media="all">
+    <!-- navigation -->
+	</head>
+	<body>
+<!--
+		<div id="loader" class="center">
+			<div class="gifLoader">
+				<center>
+					<img src="images/loading.gif" width="12%" height="auto"><br><br>
+				</center>
+			</div>
+		</div>
+-->
+		<header>
+			<nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar" id="navbarDown">
+				<a class="navbar-brand" href="index.html">
+					<img src="images/logo2.gif">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-	controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<div class="navbar-toggler-icon" id="openNavBar"></div>
+					<img src="images/close.png" width="20px" height="20px" style="display: none;" id="closeNavBar">
+
+				</button>
+
+
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav" style="padding-left: 2%;">
+						<li class="nav-item">
+							<span><b><a href="#home" style="width: 100%;"><font size="2"><b>HOME</b></font></a></b></span>
+						</li>
+						<li class="nav-item">
+							<span><b><a href="demo.html" style="width: 100%;"><font size="2"><b>DEMOS</b></font></a></b></span>
+						</li>
+						<li class="nav-item">
+							<span><b><a href="#testimonials" style="width: 100%;"><font size="2"><b>TESTIMONIALS</b></font></a></b></span>
+						</li>
+						<li class="nav-item">
+							<span><b><a href="#contact" style="width: 100%;"><font size="2"><b>CONTACT US</b></font></a></b></span>
+						</li>
+
+						<!-- PACKAGES START AT $80 button in mobile case -->
+						<li class="nav-item cus-pkg-start-mobile" >
+							<div class="my-2 my-lg-0 ml-auto">
+								<a href="#contact">
+									<button class="btn btn-md btn-block aqua-gradient button1" id="price_mobile" style="display: block; box-shadow: 0 0 black;">
+										<div id="hideThis_mobile">PACKAGES START AT $80</div>
+										<div id="showThis_mobile" style="display: none;">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;
+											CONTACT US
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;
+										</div>
+									</button>
+								</a>
+							</div>
+						</li>
+					</ul>
+
+					<!-- PACKAGES START AT $80 button in laptop case -->
+					<div class="my-2 my-lg-0 ml-auto cus-pkg-start-laptop">
+						<a href="#contact">
+							<div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+								<button class="btn btn-md btn-block aqua-gradient button1" id="price_laptop" style="display: block;">
+									<div id="hideThis_laptop">PACKAGES START AT $80</div>
+									<div id="showThis_laptop" style="display: none;">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;
+											CONTACT US
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;
+									</div>
+								</button>
+							</div>
+							<div class="d-sm-block d-md-none d-lg-none d-xl-none">
+								<button class="btn btn-md aqua-gradient button1" id="price_laptop" style="display: block;">
+									<div id="hideThis_laptop">PACKAGES START AT $80</div>
+									<div id="showThis_laptop" style="display: none;">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;
+											CONTACT US
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;
+									</div>
+								</button>
+							</div>
+						</a>
+					</div>
+
+
+				</div>
+			</nav>
+			<br><br>
+		</header>
+
+		<main>
+			<div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+				<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel" data-interval="4000">
+
+					<ol class="carousel-indicators" style="padding-bottom: 2%;">
+						<li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example-1z" data-slide-to="1"></li>
+						<li data-target="#carousel-example-1z" data-slide-to="2"></li>
+					</ol>
+
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="view">
+								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" style="height: 100%;" src="images/slide1Back.png" alt="First slide">
+								<div class="black-overlay aqua-gradient"></div>
+							</div>
+							<div class="carousel-caption" id="moveImage">
+								<img src="images/slide1Front.png" class="img-fluid captionImage" style="margin-top: 180%; margin-left: 60%;" width="65%" height="auto">
+							</div>
+							<div class="carousel-caption" style="padding-bottom: 15%; padding-right: 20%;">
+								<h1 class="h1-responsive">WE ARE RESHAPING SHOPPING <br> EXPERIENCE AND HOW WE PROVIDE <br> IT TO YOU</h1>
+								<h3 class="h3-responsive"><b><i>Virtually at a time</i></b></h3>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="view">
+								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" style="height: 100%;" src="images/slide2Back.jpg" alt="Second 		slide" width="100%">
+								<div class="black-overlay aqua-gradient"></div>
+							</div>
+							<div class="carousel-caption" id="moveImage1">
+								<img src="images/slide2Front.png" class="img-fluid captionImage" style="margin-left: 60%;" width="65%" height="auto">
+							</div>
+							<div class="carousel-caption" style="padding-bottom: 17%; padding-right: 20%;">
+								<h1 class="h1-responsive">AUGMENTED REALITY NEVER <br> LOOKED SO GOOD</h1>
+								<h3 class="h3-responsive"><b><i>Contactless shopping from anywhere</i></b></h3>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="view">
+								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" style="height: 100%;" src="images/slide3Back.jpg" alt="Third slide" 	width="100%">
+								<div class="black-overlay aqua-gradient"></div>
+							</div>
+							<div class="carousel-caption" id="moveImage3">
+								<img src="images/slide3Front.png" class="img-fluid captionImage" style="margin-left: 60%;" width="60%" height="auto">
+							</div>
+							<div class="carousel-caption" style="padding-bottom: 15%; padding-right: 20%;">
+								<h1 class="h1-responsive">VIRTUALLY ANYTHING!</h1>
+								<h3 class="h3-responsive"><b><i>Jewelry, Watches, Make-Up, Specs and Coloured Contacts!</i></b></h3>
+								<br>
+								<center>
+									<h3 class="h3-responsive">
+										<a href="demo.html">
+											<button class="btn btn-md purple-gradient button1" id="price" style="display: block;">
+												<font size="3" color="white"><b>VIEW DEMO</b></font>
+											</button>
+										</a>
+									</h3>
+								</center>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- PHONE BANNER -->
+			<div class="d-block d-sm-block d-md-none d-lg-none d-xl-none">
+				<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000">
+
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example-1z" data-slide-to="1"></li>
+						<li data-target="#carousel-example-1z" data-slide-to="2"></li>
+					</ol>
+
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="view">
+								<img class="d-sm-block d-md-none d-lg-none" src="images/whiteBg.jpg" alt="First slide" height="100%">
+								<div class="black-overlay aqua-gradient"></div>
+							</div>
+
+							<div class="carousel-caption" style="padding-bottom: 85%;">
+								<font size="5">
+									WE ARE RESHAPING SHOPPING EXPERIENCE AND HOW WE PROVIDE IT TO YOU
+								</font>
+
+								<h3 class="h3-responsive"><b><i>Virtually at a time</i></b></h3>
+							</div>
+							<div class="carousel-caption" id="moveImage">
+								<img src="images/slide1Front.png" style="margin-left: 5%; margin-bottom: -35px;" height="auto" width="165%">
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="view">
+								<img class="d-sm-block d-md-none d-lg-none" src="images/whiteBg.jpg" alt="First slide" height="100%">
+								<div class="black-overlay aqua-gradient"></div>
+							</div>
+							<div class="carousel-caption" style="padding-bottom: 85%;">
+								<font size="5">
+									AUGMENTED REALITY NEVER LOOKED SO GOOD
+								</font>
+								<h3 class="h3-responsive"><b><i>Contactless shopping from anywhere</i></b></h3>
+							</div>
+							<div class="carousel-caption" id="moveImage1">
+								<img src="images/slide2Front.png" style="padding-left: 5%;" width="145%" height="auto">
+							</div>
+
+						</div>
+						<div class="carousel-item">
+							<div class="view">
+								<img class="d-sm-block d-md-none d-lg-none" src="images/whiteBg.jpg" alt="First slide" height="100%">
+								<div class="black-overlay aqua-gradient"></div>
+							</div>
+
+							<div class="carousel-caption" style="padding-bottom: 75%;">
+								<font size="5">
+									VIRTUALLY ANYTHING!
+								</font>
+								<h3 class="h3-responsive"><b><i>Jewelry, Watches, Make-Up, Specs and Coloured Contacts!</i></b></h3>
+								<br>
+								<center>
+									<h3 class="h3-responsive">
+										<a href="demo.html">
+											<button class="btn btn-md purple-gradient button1" id="price" style="display: block;">
+												<font size="3" color="white"><b>VIEW DEMO</b></font>
+											</button>
+										</a>
+									</h3>
+								</center>
+							</div>
+							<div class="carousel-caption" id="moveImage3">
+								<img src="images/slide3Front.png" width="125%" height="auto">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="home"></div>
+			<br>
+			<div class="container-fluid">
+
+
+				<div class="row camWeara">
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 10%;">
+						<h1>
+							VIRTUAL TRY-ON FROM ANYWHERE
+						</h1>
+						<br><br>
+						<p>Our augmented reality virtually allows you to wear the product you are selling in a realistic way: at home, in the office, at the bar with friends, in the shop. Camweara is a virtual try-on plugin which can be integrated to any shopping website including magento, shopify & woocommerce.</p>
+					</div>
+
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 5%;">
+						<br><br>
+						<div>
+							<img src="images/tryon1.gif" class="img-fluid">
+						</div>
+
+					</div>
+				</div>
+
+				<br><br>
+				<center>
+					<hr>
+				</center>
+				<br><br>
+
+				<div class="row camWeara" data-aos="fade-up" data-aos-duration="1500">
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 10%;">
+						<center>
+							<div>
+								<img src="images/tryon4.gif" class="img-fluid">
+							</div>
+						</center>
+					</div>
+
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 10%;">
+						<br><br><br>
+						<h1>
+							DIGITAL PLATFORM INCREASING CUSTOMER ENGAGEMENT
+						</h1>
+						<br><br>
+						<p>Camweara is part of the emerging technology and innovation, that offers massive product and brand differentiation - increasing customer engagement and satisfaction - especially for the e-commerce market of the new digital age. Stand out in the sea of online retailers that are competing against you!</p>
+					</div>
+				</div>
+
+				<br><br>
+				<hr>
+				<br><br>
+
+				<div class="row camWeara" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 10%;">
+						<br><br><br>
+						<h1>
+							HALF RETURNS, DOUBLE SALES & TRIPLE VISITORS!
+						</h1>
+						<br><br>
+						<p>Not only do you see increased sales, quicker checkouts and growth in customer reach - there is also a huge percentage on cut back on returns! Trying before buying helps customers to decide their desired product at the right size.</p>
+					</div>
+					<br><br>
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 5%;">
+						<br><br>
+						<div>
+							<img src="images/tryon5.gif" class="img-fluid">
+						</div>
+					</div>
+				</div>
+
+
+				<br><br><br>
+				<hr>
+				<br><br><br>
+
+				<div class="row camWeara" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 5%;">
+						<center>
+							<div>
+								<img src="images/tryon8.gif" class="img-fluid">
+							</div>
+						</center>
+						<br><br><br>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding-left: 10%;">
+						<br>
+						<h1>
+							DETAILED ANALYSIS & HIGHER CONVERSIONS
+						</h1>
+						<br><br>
+						<p>We provide detailed analytics of usage of TryOn. We analyse data then implement new features, enhancements and make highest impact to increase your sales and conversions by 20-30%. This makes online shopping more engaging, whilst attracting new customers.</p>
+					</div>
+				</div>
+				<div id="portfolio"></div>
+				<hr>
+
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+							<center>
+								<br><br>
+								<h1>
+									WHERE OUR TRY-ON <b>FEATURES CAN HELP YOU</b>
+								</h1>
+								<br><br>
+							</center>
+						</div>
+					</div>
+					<br><br>
+
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+							<img src="images/ecomPic.jpg" style="width: 100%;">
+							<br><br>
+						</div>
+						<div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+							<img src="images/retailPic.jpg" width="100%">
+
+							<br><br>
+						</div>
+						<div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+							<img src="images/businessPic.png" style="width: 100%;">
+
+						</div>
+					</div>
+				</div>
+				<br><br>
+				<hr>
+				<br><br>
+				<center>
+					<div class="row no-gutters">
+						<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+							<div class="video">
+								<video width="100%" height="auto" class="gif-overlay" autoplay loop muted>
+									<source src="videos/testimonialBanner.mp4" type="video/mp4">
+								</video>
+								<center>
+									WATCH OUR TESTIMONIAL<br>
+									<i class="fas fa-play-circle playhover" id="videoPlay" onclick="showVideo();"></i>
+								</center>
+							</div>
+
+							<div id="iFrameID1">
+								<div id="closeVid"  onclick="closeVideo();">
+									<img style="width: 50%; height: 50%;margin-top:20px;"
+									src="images/close.png"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</center>
+				<br><br>
+				<hr>
+				<div class="container-fluid" id="testimonials">
+					<center>
+						<br><br>
+						<h1 data-aos="fade-zoom-in">
+							TESTIMONIALS
+						</h1>
+					</center>
+					<div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+						<center>
+							<div class="row mt-lg-2" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-				offset="0" data-aos-duration="750">
+								<div class="container" style="margin-left: 10%; margin-right: 10%;">
+									<div class="col-12 col-sm-12 col-md-12">
+										<div id="myCarousel" class="carousel carousel1 slide" data-ride="carousel">
+											<div class="carousel-inner">
+												<div class="item carousel-item active">
+													<p class="testimonial aqua-gradient"><font size="4">CamWeara is giving us very good results. 	I am confident this will become the need of everyone to TRY and BUY.</font></p>
+
+													<div class="media">
+														<div class="media-body">
+															<div class="overview">
+																<br><br>
+																<div class="name"><b><font color="black">Rupesh Jain</font></b></div>
+																<div class="details">
+																	<font color="black">
+																		Founder & CEO, Candere By Kalyan Jewellers
+																	</font>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
+												<div class="item carousel-item">
+
+													<p class="testimonial aqua-gradient"><font size="4">ModakaTech has helped scale our e commerce business to the next level. We are very pleased for having been associated with them. Their revolutionary TRYON Software has been an added advantage and one of our USPs.</font></p>
+													<div class="media">
+														<div class="media-body">
+															<div class="overview">
+																<br><br>
+																<div class="name"><b><font color="black">Santhosh Y</font></b></div>
+																<div class="details">
+																	<font color="black">
+																		E-Commerce Manager, Vaibhav Jewellers
+																	</font>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="item carousel-item">
+
+													<p class="testimonial aqua-gradient"><font size="4">I have just started using camweara and I am happy with the response. It is a great technology for online retail companies. I for sure look forward to that.</font></p>
+													<div class="media">
+														<div class="media-body">
+															<div class="overview">
+																<br><br>
+																<div class="name"><b><font color="black">Sneha Rateria</font></b></div>
+																<div class="details">
+																	<font color="black">
+																		Founder & President, Sneha Rateria Company
+																	</font>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Carousel controls -->
+											<a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+												<i class="fa fa-angle-left"></i>
+											</a>
+											<a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+												<i class="fa fa-angle-right"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</center>
+					</div>
+
+					<!-- PHONE TESTIMONIALS -->
+					<div class="d-sm-block d-md-none d-lg-none d-xl-none" style="margin-left: -15px; margin-right: -15px;">
+						<center>
+							<div class="row mt-lg-2" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-				offset="0" data-aos-duration="750">
+								<div class="col-12 col-sm-12 col-md-12">
+									<div id="myCarousel-phone" class="carousel carousel1 slide" data-ride="carousel" style="width: 100%; height:75%">
+										<div class="carousel-inner">
+											<div class="item carousel-item active">
+												<p class="testimonial aqua-gradient"><font size="4">CamWeara is giving us very good results. I 	am confident this will become the need of everyone to TRY and BUY.</font></p>
+
+												<div class="media">
+													<div class="media-body">
+														<div class="overview">
+															<br><br>
+															<div class="name"><b><font color="black">Rupesh Jain</font></b></div>
+															<div class="details">
+																<font color="black">
+																	Founder & CEO, Candere By Kalyan Jewellers
+																</font>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+											<div class="item carousel-item">
+
+												<p class="testimonial aqua-gradient"><font size="4">ModakaTech has helped scale our e commerce 	business to the next level. We are very pleased for having been associated with them. Their 	revolutionary TRYON Software has been an added advantage and one of our USPs.</font></p>
+												<div class="media">
+													<div class="media-body">
+														<div class="overview">
+															<br><br>
+															<div class="name"><b><font color="black">Santhosh Y</font></b></div>
+															<div class="details">
+																<font color="black">
+																	E-Commerce Manager, Vaibhav Jewellers
+																</font>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="item carousel-item">
+
+												<p class="testimonial aqua-gradient"><font size="4">I have just started using camweara and I am happy with the response. It is a great technology for online retail companies. I for sure look forward to that.</font></p>
+												<div class="media">
+													<div class="media-body">
+														<div class="overview">
+															<br><br>
+															<div class="name"><b><font color="black">Sneha Rateria</font></b></div>
+															<div class="details">
+																<font color="black">
+																	Founder & President, Sneha Rateria Company
+																</font>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- Carousel controls -->
+										<a class="carousel-control left carousel-control-prev" href="#myCarousel-phone" data-slide="prev">
+											<i class="fa fa-angle-left"></i>
+										</a>
+										<a class="carousel-control right carousel-control-next" href="#myCarousel-phone" data-slide="next">
+											<i class="fa fa-angle-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</center>
+					</div>
+					<hr>
+					<br><br>
+					<section class="pt-lg-5">
+						<div class="container-fluid" style="padding-top:10px;">
+							<div class="title-desc text-center pb-3 pb-lg-5" data-aos="fade-right" data-aos-offset="300" data-aos-					easing="ease-in-sine" data-aos-duration="1500">
+								<h1 class="main-title-w3pvt" >
+									CUSTOMERS
+								</h1>
+								<br>
+								<h4>OUR CAMWEARA FAMILY IS GROWING WITH SOME OF THE MOST CREATIVE COMPANIES IN THE WORLD.</h4>
+							</div>
+
+							<div class="customer-logos" style="height: 20%; padding-left: 3%;" data-aos="fade-up" data-aos-duration="1500">
+								<div class="slide">
+									<img src="images/candere_logo.png" alt="corp-image" class="img-fluid imageBorder">
+								</div>
+								<div class="slide">
+									<img border="0" src="images/vaibhav_logo.png" alt="corp-image" class="img-fluid">
+								</div>
+								<!-- <div class="slide"><a><img src="images/fgc_logo.png" alt="corp-image" class="img-fluid"></a></div> -->
+								<div class="slide">
+									<img border="0" src="images/gehna_logo.png" alt="corp-image" class="img-fluid">
+								</div>
+								<div class="slide">
+									<img border="0" src="images/devi_logo.png" alt="corp-image" class="img-fluid">
+								</div>
+								<div class="slide">
+									<img border="0" src="images/sneha_logo.png" alt="corp-image" class="img-fluid">
+								</div>
+								<div class="slide">
+									<img border="0" src="images/trshades_logo.png" alt="corp-image" class="img-fluid">
+								</div>
+							</div>
+						</div>
+					</section>
+					<br><br>
+					<div id="contact"></div>
+					<hr>
+					<br><br><br>
+
+					<center>
+						<h1 style="padding-top:10px;">
+							GET IN TOUCH
+						</h1>
+						<br>
+						<h4>
+							GET YOUR FREE TRIAL TODAY BY SENDING A MESSAGE OR SCHEDULING A CALL
+						</h4>
+						<br>
+						<div class="container">
+							<div class="row">
+								<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+									<div class="container1">
+										<form action="" method="post" onsubmit="event.preventDefault();">
+											<div class="row">
+												<div class="col">
+													<center>
+														<br>
+														SEND A MESSAGE BY FILLING OUT THE FORM.
+													</center>
+												</div>
+												<br><br><br>
+											</div>
+
+											<!-- First Row -->
+											<div class="row">
+												<div class="col">
+													<div class="md-form mt-0">
+														<input type="text" style="font-size:20px;" name="name" id="Name" class="form-control" onchange="trackInput();">
+														<label for="Name">NAME</label>
+														<div id=nameWarn style="float: left;"></div>
+													</div>
+												</div>
+											</div>
+											<!-- Second Row -->
+											<div class="row">
+												<div class="col">
+													<div class="md-form mt-0">
+														<input type="email" style="font-size:20px;" name="email" id="EMail" class="form-control" onchange="trackInput();">
+														<label for="Email">E-MAIL</label>
+														<div id=emailWarn style="float: left;"></div>
+													</div>
+												</div>
+												<div class="col">
+													<div class="md-form mt-0">
+														<input type="number" style="font-size:20px;" name="phone" id="phno" class="form-control" onchange="trackInput();">
+														<label for="phno">PHONE NUMBER</label>
+														<div id=phoneWarn style="float: left;"></div>
+													</div>
+												</div>
+											</div>
+
+											<!-- Third Row -->
+											<div class="row">
+												<div class="col">
+													<div class="md-form mt-0">
+														<input type="text" style="font-size:20px;" name="company_name" id="CompanyName" class="form-control" onchange="trackInput();">
+														<label for="CompanyName">COMPANY NAME</label>
+														<div id=companyWarn style="float: left;"></div>
+													</div>
+												</div>
+											</div>
+
+											<!-- Fourth Row -->
+											<div class="row">
+												<div class="col">
+													<!-- Basic dropdown -->
+													<select style="font-size:20px;" class="browser-default custom-select" name="product_name" id="product" onchange="trackInput();">
+														<option selected>SELECT YOUR PRODUCT OF INTEREST</option>
+														<option value="jewellery">JEWELLERY</option>
+														<option value="sunglass">SUNGLASSES</option>
+														<option value="makeup">MAKE-UP</option>
+														<option value="contactlens">CONTACT LENS</option>
+														<option value="watches">WATCHES</option>
+														<option value="alloftheabove">ALL OF THE ABOVE</option>
+														<option value="others">OTHERS</option>
+													</select>
+													<!-- Basic dropdown -->
+													<div id=productWarn style="float: left;"></div>
+												</div>
+											</div>
+
+											<!-- Fourth Row -->
+											<div class="row">
+												<div class="col">
+													<br>
+													<div class="md-form">
+														<textarea style="font-size:20px;" class="md-textarea form-control" id="contactMessage" name="message" placeholder="MESSAGE" rows="3" onchange="trackInput();"></textarea>
+													</div>
+													<div id=messageWarn style="float: left;"></div>
+												</div>
+											</div>
+											<button type="submit" class="btn aqua-gradient btn-sm button1 price" id="sendButton" onclick="onSendClick();">
+												<font size="3"><i class="fas fa-paper-plane"></i> SEND</font>
+											</button>
+
+											<div id="sendMessage"></div>
+										</form>
+									</div>
+									<br><br>
+								</div>
+
+								<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+
+									<center>
+										<!-- Calendly inline widget begin -->
+										<div class="calendly-inline-widget"
+										data-url="https://calendly.com/camweara" style="min-					width:320px;height:620px;"></div>
+										<!-- Calendly inline widget end -->
+									</center>
+								</div>
+							</div>
+						</div>
+					</center>
+					<div class="row" id="location">
+						<div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+							<center>
+								<br><br>
+								<font size="4">
+									<h5><u>USA</u></h5> <br> 10685-B Hazelhurst, Texas 77043, USA <br>
+									<i class="fas fa-phone" style="transform: rotateZ(90deg);"></i>&nbsp;
+									<a href="tel:+1-202-596-6611">+1-202-596-6611 </a>
+								</font>
+							</center>
+						</div>
+						<div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+							<center>
+								<br><br>
+								<font size="4">
+									<h5><u>INDIA</u></h5> <br>Jayanagara 9th Block, Bengaluru, Karnataka 560069 <br>
+									<i class="fas fa-phone" style="transform: rotateZ(90deg);"></i>&nbsp;
+									<a href="tel:+91-9481110869">+91-9481110869</a>
+									<br><br>
+								</font>
+							</center>
+						</div>
+						<div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+							<center>
+								<br><br>
+								<font size="4">
+									<h5><u>HONG KONG</u></h5> <br>Harbour Centre Tower 2, Hung Hom, Hong Kong <br>
+									<i class="fas fa-phone" style="transform: rotateZ(90deg);"></i>&nbsp;
+									<a href="tel:+852-21807347" style="cursor: default;">+852 21807347</a>
+								</font>
+							</center>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+							<center>
+								<button class="btn aqua-gradient btn-lg button1 price" type="submit">
+									<a href="mailto:info@modaktech.com" class="d-block"><font color="white">info@modakatech.com</font></a>
+								</button>
+							</center>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br><br>
+			<!--Main Layout-->
+		</main>
+
+		<!-- Footer -->
+		<footer class="page-footer font-small aqua-gradient">
+			<div class="footer-copyright py-3" style="padding-left: 2.5%;">
+				<br><br>
+				<center>
+					<a href="https://www.facebook.com/modakatech/" target="_blank">
+						<i class="fab fa-facebook-f white-text mr-md-5 mr-3 fa-2x" style="padding-left: 10px;"> </i>
+					</a>
+					<a href="https://www.linkedin.com/company/modaka-technologies" target="_blank">
+						<i class="fab fa-linkedin-in white-text mr-md-5 mr-3 fa-2x"> </i>
+					</a>
+					<a href="https://www.instagram.com/camweara.ar">
+						<i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+					</a>
+				</center>
+			</div>
+			<div class="footer-copyright py-3">
+				<center>
+					<i class="far fa-copyright"></i> 2020 Modaka Technologies Pvt Ltd. All rights reserved
+				</center>
+			</div>
+		</footer>
+		<!-- Footer -->
+
+
+
+		<!--</main>-->
+		<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+		<script src="js/cursorImageMove.js"></script>
+		<script src="js/imageSwitch.js"></script>
+		<script src="js/GotoTop.js"></script>
+		<script src="js/navbarToggle.js"></script>
+		<script src="js/buttonToggleText.js"></script>
+		<script src="js/iFrameVideo.js"></script>
+		<script src="js/slick.js"></script>
+		<script src="js/slick.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script>
+			$(document).ready(function()
+			{
+				var scr_width=screen.width>480?4:1;
+					$('.customer-logos').slick({
+						slidesToShow: scr_width,
+						slidesToScroll: 1,
+						autoplay: true,
+						autoplaySpeed: 2000,
+						arrows: false,
+						dots: false,
+						pauseOnHover: true,
+						responsive: [{
+							breakpoint: 480,
+							settings: {
+							slidesToShow: 2
+							}
+						}, {
+							breakpoint: 520,
+							settings: {
+								slidesToShow: 2
+							}
+						}]
+					});
+
+
+				//Navbar collapse on mobile.
+				$(".navbar-nav li a").click(function(event) {
+					$(".navbar-collapse").collapse('hide');
+					$('#closeNavBar').fadeOut(1);
+					$('#openNavBar').css("display", "block").fadeIn();
+				});
+
+				//Close button for navbar in mobile.
+				$("#openNavBar").click(function(){
+					$('#openNavBar').fadeOut(1);
+					$('#closeNavBar').css("display", "block").fadeIn();
+				});
+				$("#closeNavBar").click(function(){
+					$('#closeNavBar').fadeOut(1);
+					$('#openNavBar').css("display", "block").fadeIn();
+				});
+
+				//Carousal slide with touch with slide.
+				$('.carousel').carousel({
+					touch: true // default
+				});
+
+			});
+		</script>
+
+<!--
+		<script>
+			document.onreadystatechange = function() {
+				if (document.readyState !== "complete") {
+					document.querySelector(
+					  "body").style.visibility = "hidden";
+					document.querySelector(
+					  "#loader").style.visibility = "visible";
+				} else {
+					document.querySelector(
+					  "#loader").style.display = "none";
+					document.querySelector(
+					  "body").style.visibility = "visible";
+				}
+			};
+		</script>
+-->
+
+		<!--Start of Tawk.to Script-->
+<!--
+		<script type="text/javascript">
+			var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+			(function(){
+				var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+				s1.async=true;
+				s1.src='https://embed.tawk.to/5f8a7c3cfd4ff5477ea6a14b/default';
+				s1.charset='UTF-8';
+				s1.setAttribute('crossorigin','*');
+				s0.parentNode.insertBefore(s1,s0);
+			})();
+		</script> -->
+
+		<!--End of Tawk.to Script-->
+	</body>
+</html>

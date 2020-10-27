@@ -1,0 +1,189 @@
+.col-center1 {
+	margin: 0 auto;
+	float: none !important;
+}
+.carousel1 {
+	margin: 50px auto;
+	padding: 0 70px;
+}
+.carousel .item {
+	color: #999;
+	font-size: 14px;
+    text-align: center;
+	overflow: hidden;
+    min-height: 290px;
+}
+.carousel .item .img-box {
+	width: 100%;
+	height: 135px;
+	margin: 0 auto;
+	padding: 5px;
+	border: 1px solid #ddd;
+	border-radius: 50%;
+}
+.carousel .img-box img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	border-radius: 50%;
+}
+.carousel .testimonial {
+    color: white;
+	margin-top: 5%;
+    position: relative;
+    padding: 15px;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+	margin-bottom: 10px;
+}
+.carousel .testimonial::after {
+	content: "";
+	width: 15px;
+	height: 15px;
+	display: block;
+	background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+	border: 1px solid #efefef;
+	border-width: 0 0 1px 1px;
+	position: absolute;
+	bottom: -8px;
+	left: 50%;
+	transform: rotateZ(-46deg);
+}
+.carousel .overview {
+	font-style: italic;
+}
+.carousel .overview b {
+	text-transform: uppercase;
+	color: #1abc9c;
+}
+.carousel .carousel-control {
+	width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    top: 50%;
+	background: none;
+}
+.carousel-control i {
+    font-size: 28px;
+	line-height: 22px;
+    position: absolute;
+    display: inline-block;
+	color: rgba(0, 0, 0, 0.8);
+    text-shadow: 0 3px 3px #e6e6e6, 0 0 0 #000;
+}
+.carousel .media {
+	margin: 45PX
+}
+
+#carousel-example-1z{
+	width: 102%;
+	height: 100%;
+	overflow:hidden;
+}
+
+
+
+.cus-pkg-start-mobile {
+	display: none;
+}
+
+.cus-pkg-start-laptop {
+	display: block;
+}
+
+
+@media screen and (max-width: 330px){
+	#carousel-example-1z{
+		height: 120%;
+		width: auto;
+		overflow:hidden;
+	}
+
+	.cus-pkg-start-mobile {
+		display: block;
+	}
+
+	.cus-pkg-start-laptop {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 360px) and (min-width: 340px){
+	#carousel-example-1z{
+		height: 100%;
+		width: auto;
+		overflow:hidden;
+	}
+
+	.bannerHeading{
+		font-size: 4 !important;
+	}
+
+	#location{
+        margin-top: -100px;
+    }
+
+		.cus-pkg-start-mobile {
+			display: block;
+		}
+
+		.cus-pkg-start-laptop {
+			display: none;
+		}
+}
+
+@media screen and (max-width: 992px) and (min-width: 700px) {
+	#carousel-example-1z{
+		width: 100%;
+		height: 41%;
+		overflow:hidden;
+	}
+	/* .carousel-inner {
+		height: 120%;
+	}
+	.view {
+		height: 120%;
+	} */
+}
+
+@media screen and (max-width: 700px) and (min-width: 370px) {
+	#carousel-example-1z{
+		width: 100%;
+		height: 90%;
+		overflow:hidden;
+	}
+
+	.bannerHeading{
+		font-size:4 !important;
+	}
+
+	#location{
+        margin-top: -100px;
+    }
+
+		.cus-pkg-start-mobile {
+			display: block;
+		}
+
+		.cus-pkg-start-laptop {
+			display: none;
+		}
+}
+
+@media only screen and (min-width: 414px) and (max-width: 736px) and (max-height: 736px) {
+/* Styles include: iphon6plus*/
+	#carousel-example-1z {
+	    width: 100%;
+	    height: 90%;
+	    overflow: hidden;
+	}
+
+
+	/* .cus-pkg-start-mobile {
+		display: none;
+	}
+
+	.cus-pkg-start-laptop {
+		display: block;
+	} */
+}

@@ -1,0 +1,32 @@
+$(".features1").mouseenter(function(){
+	$(".ecom-overlay").fadeIn(500);
+	$(".ecom-overlay-color").fadeIn(500);
+	$(".features11").fadeIn(500);
+});
+$(".ecom-overlay-color").mouseleave(function(){
+	$(".ecom-overlay").fadeOut(800);
+	$(".ecom-overlay-color").fadeOut(800);
+	$(".features11").fadeOut(800);
+});
+
+$(".features2").mouseenter(function(){
+	$(".retail-overlay").fadeIn(500);
+	$(".retail-overlay-color").fadeIn(500);
+	$(".features12").fadeIn(500);
+});
+$(".retail-overlay-color").mouseleave(function(){
+	$(".retail-overlay").fadeOut(500);
+	$(".retail-overlay-color").fadeOut(500);
+	$(".features12").fadeOut(500);
+});
+				
+$(".features3").mouseenter(function(){
+	$(".biz-overlay").fadeIn(500);
+	$(".biz-overlay-color").fadeIn(500);
+	$(".features13").fadeIn(500);
+});
+$(".biz-overlay-color").mouseleave(function(){
+	$(".biz-overlay").fadeOut(500);
+	$(".biz-overlay-color").fadeOut(500);
+	$(".features13").fadeOut(500);
+});

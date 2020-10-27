@@ -1,0 +1,32 @@
+$(document).ready(function(){
+	$("#price_mobile").mouseenter(function(){
+		$("#hideThis_mobile").fadeOut(80);
+		$("#showThis_mobile").slideDown();
+	});
+	$("#price_mobile").mouseleave(function(){
+		$("#showThis_mobile").hide();
+		$("#hideThis_mobile").slideDown();
+	});
+});
+
+$(document).ready(function(){
+	$("#price_laptop").mouseenter(function(){
+		$("#hideThis_laptop").fadeOut(80);
+		$("#showThis_laptop").slideDown();
+	});
+	$("#price_laptop").mouseleave(function(){
+		$("#showThis_laptop").hide();
+		$("#hideThis_laptop").slideDown();
+	});
+});
+
+$(document).ready(function(){
+	$("#price").mouseenter(function(){
+		$("#hideThis").fadeOut(80);
+		$("#showThis").slideDown();
+	});
+	$("#price").mouseleave(function(){
+		$("#showThis").hide();
+		$("#hideThis").slideDown();
+	});
+});
