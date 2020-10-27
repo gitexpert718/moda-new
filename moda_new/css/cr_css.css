@@ -132,7 +132,7 @@
 		}
 }
 
-@media screen and (max-width: 1600px) and (min-width: 1400px) {
+/* @media screen and (max-width: 1600px) and (min-width: 1400px) {
 	#carousel-example-1z{
 		width: 100%;
 		height: 70%;
@@ -146,7 +146,7 @@
 		height: 60%;
 		overflow:hidden;
 	}
-}
+} */
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
 	#carousel-example-1z{
