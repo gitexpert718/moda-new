@@ -75,6 +75,15 @@
 	margin: 45PX
 }
 
+.view-custom {
+	height: 100%;
+}
+.view-custom img {
+	position: absolute;
+	bottom: 0px;
+	min-height: 100%;
+}
+
 #carousel-example-1z{
 	width: 102%;
 	height: 100%;
@@ -94,7 +103,7 @@
 
 @media screen and (max-width: 330px){
 	#carousel-example-1z{
-		height: 120%;
+		height: 100%;
 		width: auto;
 		overflow:hidden;
 	}
@@ -200,16 +209,15 @@
 /* Styles include: iphon6plus*/
 	#carousel-example-1z {
 	    width: 100%;
-	    height: 90%;
+	    height: 80%;
 	    overflow: hidden;
 	}
-
-
-	/* .cus-pkg-start-mobile {
-		display: none;
-	}
-
-	.cus-pkg-start-laptop {
-		display: block;
-	} */
 }
+
+/* @media screen and (max-width: 414px) and (min-width: 375px) {
+	#carousel-example-1z{
+		width: 100%;
+		height: 70%;
+		overflow:hidden;
+	}
+} */

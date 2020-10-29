@@ -279,7 +279,6 @@
 		<main>
 			<div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
 				<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel" data-interval="4000">
-
 					<ol class="carousel-indicators" style="padding-bottom: 2%;">
 						<li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
 						<li data-target="#carousel-example-1z" data-slide-to="1"></li>
@@ -288,7 +287,7 @@
 
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<div class="view">
+							<div class="view view-custom">
 								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" src="images/slide1Back.png" alt="First slide">
 								<div class="black-overlay aqua-gradient"></div>
 							</div>
@@ -300,8 +299,9 @@
 								<h3 class="h3-responsive"><b><i>Virtually at a time</i></b></h3>
 							</div>
 						</div>
+
 						<div class="carousel-item">
-							<div class="view">
+							<div class="view view-custom">
 								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" src="images/slide2Back.jpg" alt="Second 		slide" width="100%">
 								<div class="black-overlay aqua-gradient"></div>
 							</div>
@@ -313,8 +313,9 @@
 								<h3 class="h3-responsive"><b><i>Contactless shopping from anywhere</i></b></h3>
 							</div>
 						</div>
+
 						<div class="carousel-item">
-							<div class="view">
+							<div class="view view-custom">
 								<img class="d-none d-sm-none d-md-block d-lg-block d-xl-block img-fluid" src="images/slide3Back.jpg" alt="Third slide" 	width="100%">
 								<div class="black-overlay aqua-gradient"></div>
 							</div>
@@ -336,6 +337,7 @@
 								</center>
 							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -1013,12 +1015,43 @@
 
 			var isiPad = navigator.userAgent.match(/iPad/i) != null;
 			if(isiPad) {
-				document.getElementById("carousel-example-1z").style.height = "40%";
+				document.getElementById("carousel-example-1z").style.height = "41%";
 			}
+			console.log('isiPad', isiPad);
+			// var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1;
+			// if(isAndroid) {
+			// 	document.getElementById("phone-carousel-inner").style.height = "90%";
+			// }
 
-			var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1;
-			if(isAndroid) {
-				document.getElementById("phone-carousel-inner").style.height = "90%";
+			var isMobile = {
+				Android: function() {
+					return navigator.userAgent.match(/Android/i);
+				},
+				BlackBerry: function() {
+					return navigator.userAgent.match(/BlackBerry/i);
+				},
+				iOS: function() {
+					return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+				},
+				Opera: function() {
+					return navigator.userAgent.match(/Opera Mini/i);
+				},
+				Windows: function() {
+					return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+				},
+				any: function() {
+					return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+				}
+			};
+
+			if (isMobile.any()) {
+				console.log("mobile");
+				if(window.innerWidth > 370 && window.innerWidth < 450) {
+					// document.getElementById("carousel-example-1z").style.height = "90%";
+				}
+			}
+			if (isMobile.iOS()) {
+				console.log('iOS');
 			}
 
 		</script>
